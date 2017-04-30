@@ -60,7 +60,7 @@ class IdeasController < ApplicationController
  	 end
 
   	def tag_params
-  	  params[:tags]
+  	  params[:tags]	
   	end
   
  	def set_tags
