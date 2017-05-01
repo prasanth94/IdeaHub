@@ -1,19 +1,23 @@
 <div class = 'index'>
-  <table class="table">
-    <thead class="thead-default">
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <% @ideas.each do |idea| %>
+<table class="table">
+<thead class="thead-inverse">
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+<% @ideas.each do |idea| %>
+  
     <tr>
-      <td><%= idea.title %></td>
+      <td><a href= "<%= user_idea_path(@user, idea) %>"><%= idea.title %></a></td>
       <td><%= idea.description %></td>
       <td> <%= link_to "edit", edit_user_idea_path(@user, idea), class: 'btn btn-primary' %></td> 
       <td><%= link_to 'Destroy', user_idea_path(@user, idea), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary'  %></td>  
-    </tr>
-  <% end %>
+  </tr>
+  
+<% end %>
+</tbody>
 </table>
 <%= link_to "create", new_user_idea_path, class: 'btn btn-primary'  %>
 </div>

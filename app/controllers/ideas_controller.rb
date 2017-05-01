@@ -45,7 +45,8 @@ class IdeasController < ApplicationController
   	@idea = Idea.find(params[:id])
   	@idea.idea_taggings.delete_all
     @idea.destroy
-    redirect_to user_ideas_path(@user), notice: 'Idea was successfully destroyed.'
+    redirect_to user_ideas_path(@user)
+    flash[:success] = 'Idea deleted successfully'
   end
 
   def show
