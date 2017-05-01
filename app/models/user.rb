@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :ideas, as: :owner
+	has_many :ideas, foreign_key: :owner_id
 	before_save { email.downcase! }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence:   true, length: { maximum: 25 },

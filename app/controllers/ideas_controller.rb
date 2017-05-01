@@ -1,24 +1,25 @@
 class IdeasController < ApplicationController
   before_action :authenticate_user
+  before_action :set_user
 
   def index
-  	@ideas = Idea.all
+  	@ideas =  @user.ideas
   end
 
   def new
-  	@idea = Idea.new
+  	@idea = Idea.new(owner: @user)
   end
 
   def create
   	@idea = Idea.new(idea_params)
-  	@idea.owner = current_user
+  	@idea.owner = @user
   	set_tags
       if @idea.save
-        redirect_to @idea
-        flash[:success] = 'Trip created successfully'
+        redirect_to user_idea_path(@user, @idea)
+ 	    flash[:success] = 'Idea created successfully'
       else
         render :new
-        flash[:danger] = 'Trip has not created'
+        flash[:danger] = 'Idea has not created'
       end
   end
 
@@ -28,24 +29,23 @@ class IdeasController < ApplicationController
   end
 
   def update
-  	respond_to do |format|
       @idea = Idea.find(params[:id]) 
       raise "you are not authorised" if current_user != @idea.owner
       @idea.idea_taggings.delete_all
       set_tags
       if @idea.update(idea_params)
-        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
+        redirect_to user_idea_path(@user, @idea)
+        flash[:success] = 'Idea updated successfully'
       else
-        format.html { render :edit }
+        render :edit
       end
-    end
   end
 
   def destroy
   	@idea = Idea.find(params[:id])
   	@idea.idea_taggings.delete_all
     @idea.destroy
-    redirect_to root_path, notice: 'Idea was successfully destroyed.'
+    redirect_to user_ideas_path(@user), notice: 'Idea was successfully destroyed.'
   end
 
   def show
@@ -69,6 +69,10 @@ class IdeasController < ApplicationController
   	  	tag = Tag.find_or_create(input_tag)
   	  	IdeaTagging.create(idea: @idea, tag: tag)
       end
+    end
+
+    def set_user 
+      @user = User.find(params[:user_id])
     end
 
   

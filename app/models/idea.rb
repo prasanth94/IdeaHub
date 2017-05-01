@@ -1,5 +1,5 @@
 class Idea < ActiveRecord::Base
-  belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
+  belongs_to :owner, class_name: 'User'
   has_many :idea_taggings
   has_many :tags, through: :idea_taggings
   validates :title, presence:   true, length: { maximum: 20 }

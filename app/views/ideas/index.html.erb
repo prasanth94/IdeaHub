@@ -7,12 +7,10 @@
     <tr>
       <td><%= idea.title %></td>
       <td><%= idea.description %></td>
-      <% if current_user == idea.owner %>
-        <td> <%= link_to "edit", edit_idea_path(idea) %></td> 
-        <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>   
+      <td> <%= link_to "edit", edit_user_idea_path(@user, idea) %></td> 
+      <td><%= link_to 'Destroy', user_idea_path(@user, idea), method: :delete, data: { confirm: 'Are you sure?' } %></td>  
     </tr>
   <% end %>
 </table>
-<%= link_to "create", new_idea_path %>
+<%= link_to "create", new_user_idea_path %>
 <%= link_to "logout", logout_path, method: "delete" %>
