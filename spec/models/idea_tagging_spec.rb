@@ -9,5 +9,9 @@ RSpec.describe IdeaTagging, type: :model do
 
   it { is_expected.to validate_presence_of :idea }
   it { is_expected.to validate_presence_of :tag }
+
+  it_behaves_like "common to all models" do
+    let(:record) { create(:idea_tagging)}
+  end
   
 end

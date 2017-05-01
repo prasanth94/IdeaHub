@@ -10,4 +10,9 @@ RSpec.describe Tag, type: :model do
   it { is_expected.to validate_length_of(:name).is_at_most(10) }
 
   it { is_expected.to validate_uniqueness_of :name }
+
+  it_behaves_like "common to all models" do
+    let(:record) { create(:tag)}
+  end
+
 end

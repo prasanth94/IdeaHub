@@ -13,4 +13,8 @@ RSpec.describe Idea, type: :model do
 
   it { is_expected.to validate_length_of(:title).is_at_most(20) }
   it { is_expected.to validate_length_of(:description).is_at_least(10) }
+
+  it_behaves_like "common to all models" do
+  	let(:record) { create(:idea)}
+  end
 end

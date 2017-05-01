@@ -14,4 +14,9 @@ RSpec.describe User, type: :model do
 
    it { is_expected.to allow_value('example@example.com').for(:email) }
    it { is_expected.not_to allow_value('example@example-com').for(:email) }
+
+   it_behaves_like "common to all models" do
+    let(:record) { create(:user)}
+   end
+
 end

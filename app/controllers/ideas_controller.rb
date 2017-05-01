@@ -43,10 +43,9 @@ class IdeasController < ApplicationController
 
   def destroy
   	@idea = Idea.find(params[:id])
+  	@idea.idea_taggings.delete_all
     @idea.destroy
-    #respond_to do |format|
     redirect_to root_path, notice: 'Idea was successfully destroyed.'
-    #format.json {head :no_content}
   end
 
   def show
