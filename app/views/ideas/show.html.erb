@@ -1,3 +1,14 @@
-Title:<%= @idea.title %><br>
-Description:<%= @idea.description %><br>
-Tags:<%= @idea.tags.map(&:name).join(",") %><br>
+<table class="table">
+    <thead class="thead-default">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Tags</th>
+      </tr>
+    </thead>
+    <tr>
+      <td><%= @idea.title %></td>
+      <td><%= @idea.description %></td>
+      <td><%= @idea.tags.map(&:name).join(",") %></td>
+    </tr>
+</table>

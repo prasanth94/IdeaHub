@@ -1,34 +1,36 @@
-<%= form_for(@idea, url: url, method: method) do |f| %>
-  <% if @idea.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this cart from being saved:</h2>
+<div class="form">
+  <div class="col-md-6 col-md-offset-3">
+    <% if @idea.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this cart from being saved:</h2>
 
-      <ul>
-      <% @idea.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @idea.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
 
-    <div class="field">
+     <% end %>
+
+    <%= form_for(@idea, url: url, method: method) do |f| %>
+
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
+    <%= f.text_field :title, class: 'form-control' %>
+  
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
+    <%= f.text_area :description, class: 'form-control' %>
+  
     <%= label_tag 'tags' %><br>
     <% if f.object.persisted? %>
       <%= text_area_tag(:tags, f.object.tags.map(&:name).join(",")) %>
-      
     <% else %>
       <%= text_area_tag 'tags' %>
-    <% end %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <% end %><br>
+
+    <%= f.submit "Create Idea", class: "btn btn-primary"  %>
+
+  <% end %>
+</div>
+</div>
+
