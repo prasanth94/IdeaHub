@@ -13,4 +13,5 @@
       <td><%= @idea.tags.map(&:name).join(",") %></td>
     </tr>
 </table>
+<%= link_to "Ideas", user_ideas_path(@user), class: 'btn btn-primary' %>
 </div>
