@@ -26,7 +26,8 @@
       <%= text_area_tag(:tags, f.object.tags.map(&:name).join(",")) %>
     <% else %>
       <%= text_area_tag 'tags' %>
-    <% end %><br>
+    <% end %>
+    <label>Enter the tags seperated by commas</label><br>
 
     <%= f.submit "Create Idea", class: "btn btn-primary"  %>
 
